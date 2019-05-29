@@ -1,0 +1,40 @@
+version: "2"
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    image: php:apache-plus
+    ports:
+      - 8080:80
+    volumes:
+      - ./src/:/var/www/html/
+    depends_on:
+      - mysql
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    command: 
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+    ports:
+      - 33061:3306
+    # volumes:
+    #   - ./data/mysql:/var/lib/mysql
+
+
+      # create database bdEvento;
+
+#      create table participante (id integer not null primary key auto_increment, 
+# nome varchar(255) not null, email varchar(255), linkedin varchar(255), dpt varchar(255));
+
+# create table pessoas (id integer not null primary key auto_increment, nome varchar(255) not null, senha varchar(50) not null ,email varchar(255), linkedin varchar(255), dpt varchar(255));
+
+#  insert into pessoas(nome, senha, email, linkedin, dpt) values 
+#   ("Aline Donato Carreiro", "abc123"," ", "https://www.linkedin.com/in/alinedonato/", "cstsi");
+
+# select * from participante;
+
+#  insert into pessoas(nome, senha, email, linkedin, dpt) values  ("Alana Marques de Morais","ab24" ,"alana_mm@hotmail.com ", "https://www.linkedin.com/in/alana-morais-b6b0a195/", "cstsi");
